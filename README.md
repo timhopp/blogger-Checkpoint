@@ -88,7 +88,7 @@ Schema:
   title: { type: String, required: true }
   body: { type: String, required: true }
   published: { type: Boolean, default: true }
-  creatorEmail: { type: String, required: true }
+  : { type: String, required: true }
 ```
 
 - GET: '/' Returns all pubished blogs \*\*\*

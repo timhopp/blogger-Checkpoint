@@ -1,7 +1,9 @@
 <template>
-  <div class="posts">
-
-
+  <div  class="posts col-11 rounded text-white bg-dark m-3 border border-warning">
+  <h2>{{postData.title}}</h2>
+  <h5>Author- {{postData.creatorEmail}}</h5>
+  <p>{{postData.body}}</p>
+  <button class="btn btn-block btn-warning" @click="viewComments(postData)"> </button>
   </div>
 </template>
 
@@ -9,11 +11,22 @@
 <script>
 export default {
   name: 'posts',
+  props: [
+    "postData",
+  ],
   data(){
     return {}
   },
   computed:{},
-  methods:{},
+  methods: {
+    viewComments(postData) {
+      this.$router.push({name: 'Post', params: { postId: postData._id } })
+      this.$store.dispatch("setCurrentPost", postData._id)
+      // let currentPost = this.$store.state.posts.filter(post => postData._id == post._id)
+      
+    },
+
+  },
   components:{}
 }
 </script>
