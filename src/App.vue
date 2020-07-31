@@ -27,4 +27,12 @@ export default {
 @import "./assets/_variables.scss";
 @import "bootstrap";
 @import "./assets/_overrides.scss";
+body{
+  background-image: url('https://cdn.theatlantic.com/thumbor/YeiRCoq8L9pTxxNF2L0XDPDFcg8=/900x551/media/img/photo/2015/03/aoshima-japans-cat-island/c01_RTR4RUGT/original.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Caveat', cursive;
+}
 </style>
