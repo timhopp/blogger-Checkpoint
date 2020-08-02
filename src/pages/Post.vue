@@ -1,18 +1,25 @@
 <template>
   <div class="Post">
-    <!-- <div class="bg-dark text-white border border-warning">
-      <h1>{{singlePostData.title}}</h1>
-      <h5>{{singlePostData.creatorEmail}}</h5>
-      <p>{{singlePostData.body}}</p>
-     </div> -->
-    <comments v-for="singleComment in comments" :commentData="singleComment" :key="singleComment.blogId"/> 
+    <div class="bg-dark text-white border border-warning">
+      <h1>{{singlePost.title}}</h1>
+      <h5>Author: {{singlePost.creatorEmail}}</h5>
+      <p>{{singlePost.body}}</p>
+      <form @submit.prevent="addComment">
+      <div class="form-group">
+    <input type="text" class="form-control" placeholder="Enter Comment Here..." v-model="newComment.comment">
+   </div>
+    <button class="btn btn-block btn-info text-white" type="submit" >AddComment</button>
+        </form>
+     
+     </div>
+    <comments v-for="singleComment in comments" :commentData="singleComment" :key="singleComment.Id"/> 
   </div>
 </template>
 
 
 <script>
 import comments from "../components/comments"
-import singlepost from "../components/singlepost"
+// import singlepost from "../components/singlepost"
 export default {
   name: 'Post',
   props: [
@@ -20,21 +27,37 @@ export default {
    "commentData"
   ],
   data(){
-    return {}
+    return {
+      newComment: {
+          }
+    }
   },
   mounted(){
-    // this.$store.dispatch('getPostById')
-    this.$store.dispatch('getComments', this.$store.state.currentPost._id)
+  // this.$store.state.dispatch("getComments", this.#store.state.currentPost.id )
   },
   computed:{
     comments() {
       return this.$store.state.comments;
-    }
+    },
+     singlePost() {
+     return this.$store.state.currentPost;
+   }
   },
-  methods:{},
+  methods:{
+    addComment(){ 
+      this.$store.dispatch("addComment",
+    {
+      body: this.newComment.comment,
+      blogId: this.$store.state.currentPost.id,
+      creatorEmail: this.$store.state.currentPost.creatorEmail,
+    })
+    },
+
+  },
+
   components:{
     comments,
-    singlepost
+    // singlepost
 }
 }
 </script>

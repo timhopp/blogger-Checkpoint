@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
       <button type="button" class="btn btn-block btn-warning btn-lrg col-6 text-white text-center m-2" data-toggle="modal" data-target=".bd-example-modal-lg">Create A Blog Post</button>
 <form @submit.prevent="addPost">
-<div class="modal fade bd-example-modal-lg p-5" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="newPostModal" class="modal fade bd-example-modal-lg p-5" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg p-5">
     <div class="modal-content p-5">
       Make a Post!
@@ -55,6 +55,7 @@ export default {
   methods: {
     addPost(){
       this.$store.dispatch("addPost", this.newPost);
+      $("#newPostModal").modal("hide");
     }
   },
   components: {

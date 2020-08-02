@@ -18,16 +18,15 @@ export default {
   name: "Profile",
   data(){
     return {
-
     }
   },
   mounted(){
   this.$store.dispatch('getPostsByProfile')
+ 
   },
   computed: {
     profilePosts() {
       return this.$store.state.profilePosts;
-      console.log(profilePosts)
     },
     profile(){
       return this.$store.state.profile;

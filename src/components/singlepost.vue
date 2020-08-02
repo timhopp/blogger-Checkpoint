@@ -11,7 +11,7 @@
 export default {
   name: 'singlepost',
   props: [
-    "sinlgePostData",
+    "singlePostData",
   ],
   data(){
     return {}
