@@ -85,8 +85,8 @@ export default new Vuex.Store({
 
     async deleteComment({commit, dispatch}, payload) {
          try{
-        let res = await api.delete("comments/" + payload.id, payload)
-        dispatch('setCurrentComments', payload.id)
+        let res = await api.delete("comments/" + payload.id)
+        dispatch('setCurrentComments', payload.blogId)
       } catch(error){
         console.error(error)
       }
@@ -103,8 +103,9 @@ export default new Vuex.Store({
 
     async addComment({commit, dispatch}, payload) {
       try{
-        let res = api.post("comments/" , payload )
-        // dispatch('setCurrentComments', payload.blogId)
+        debugger
+        let res = await api.post("comments/" , payload )
+        dispatch('setCurrentComments', payload.blogId)
         console.log(payload)
       } catch(error){
         console.error(error)
@@ -113,7 +114,7 @@ export default new Vuex.Store({
 
     async editComment({commit, dispatch}, payload){
       try {
-         let res = api.put("comments/"+ payload.blogId, payload)
+         let res = await api.put("comments/"+ payload.blogId, payload)
          dispatch('setCurrentComments', payload.blogId)
          console.log(payload)
       } catch(error){
@@ -149,7 +150,7 @@ export default new Vuex.Store({
        this.state.currentPost = {}
        this.state.comments = {}
        let res = await api.get("/blogs/" + postDataId)
-
+debugger
        console.log("current post comments", res.data.comments)
        console.log("prifle", this.state.profile)
        commit("setComments", res.data.comments) 

@@ -46,6 +46,7 @@ export default {
   },
   methods:{
     addComment(){ 
+    
       this.$store.dispatch("addComment",
     {
       body: this.newComment.comment,
