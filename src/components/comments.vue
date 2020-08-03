@@ -2,7 +2,7 @@
   <div class="comments bg-dark text-white border border-info">
        <h3>{{commentData.creatorEmail}}</h3>
      <h3>{{commentData.body}}</h3>
-   <button type="button" class="btn btn-warning btn-block text-white text-center mb-2" data-toggle="modal" data-target=".bd-example-modal-lg">Edit Comment</button>
+   <button type="button" class="btn btn-warning text-white text-center mb-2" data-toggle="modal" data-target=".bd-example-modal-lg">Edit Comment</button>
      <form @submit.prevent="editComment(commentData)">
 <div id="commentModal" class="modal fade bd-example-modal-lg p-5" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg p-5">
@@ -38,7 +38,17 @@ export default {
     Comment: {}
     }
   },
-  computed:{},
+  //  mounted(){
+  // this.$store.dispatch("setCurrentComments", this.$route.params.postId )
+  // },
+  computed:{
+    comments() {
+      return this.$store.state.comments;
+    },
+     singlePost() {
+     return this.$store.state.currentPost;
+   }
+  },
   methods:{ 
     editComment(commentData){
       this.$store.dispatch('editComment', {
@@ -49,6 +59,7 @@ export default {
 
       })
       $("#commentModal").modal("hide");
+      this.$store.dispatch("setCurrentComments", this.commentData.id)
     },
     deleteComment(commentData){
       this.$store.dispatch("deleteComment", {
@@ -58,6 +69,7 @@ export default {
         id: this.commentData.id,
       }
       )
+      this.$store.dispatch("setCurrentComments", this.commentData.id)
   },
   },
   components:{}

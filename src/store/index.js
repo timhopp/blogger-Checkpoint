@@ -70,22 +70,23 @@ export default new Vuex.Store({
         console.error(error)
       } 
     },
-    async getComments({commit, dispatch}, postId) {
-      try {
-        this.state.currentPost = {}
-        this.state.comments = {}
-        let res = await api.get("/blogs/" + postId)
-        commit("setComments", res.data.comments);
-        commit("setCurrentPost" , res.data.blog)
-      } catch(error){
-        console.error(error)
-      }
-    },
+    // // async getComments({commit, dispatch}, postId) {
+    // //   try {
+    // //     debugger
+    // //     this.state.currentPost = {}
+    // //     this.state.comments = {}
+    // //     let res = await api.get("/blogs/" + postId)
+    // //     commit("setComments", res.data.comments);
+    // //     commit("setCurrentPost" , res.data.blog)
+    // //   } catch(error){
+    // //     console.error(error)
+    // //   }
+    // },
 
     async deleteComment({commit, dispatch}, payload) {
          try{
         let res = await api.delete("comments/" + payload.id, payload)
-        dispatch('getComments')
+        dispatch('setCurrentComments', payload.id)
       } catch(error){
         console.error(error)
       }
@@ -103,7 +104,7 @@ export default new Vuex.Store({
     async addComment({commit, dispatch}, payload) {
       try{
         let res = api.post("comments/" , payload )
-        dispatch('getComments', payload.blogId)
+        // dispatch('setCurrentComments', payload.blogId)
         console.log(payload)
       } catch(error){
         console.error(error)
@@ -112,8 +113,8 @@ export default new Vuex.Store({
 
     async editComment({commit, dispatch}, payload){
       try {
-         let res = api.put("comments/"+ payload.Id, payload)
-         dispatch('getComments', payload.blogId)
+         let res = api.put("comments/"+ payload.blogId, payload)
+         dispatch('setCurrentComments', payload.blogId)
          console.log(payload)
       } catch(error){
         console.error(error)

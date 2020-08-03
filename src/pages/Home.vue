@@ -54,7 +54,10 @@ export default {
   },
   methods: {
     addPost(){
-      this.$store.dispatch("addPost", this.newPost);
+      this.$store.dispatch("addPost", {
+        body: this.newPost.body,
+        title: this.newPost.title,
+      });
       $("#newPostModal").modal("hide");
     }
   },

@@ -20,6 +20,7 @@ export default {
   computed:{},
   methods: {
     viewComments(postData) {
+      debugger
       this.$router.push({name: 'Post', params: { postId: postData._id } })
       this.$store.dispatch("setCurrentComments", postData._id)
       // let currentPost = this.$store.state.posts.filter(post => postData._id == post._id)

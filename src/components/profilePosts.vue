@@ -48,11 +48,14 @@ export default {
     return {}
   },
   computed:{
-
+    comments() {
+     return this.$store.state.comments;
+   }
 
   },
   methods: {
     viewComments(profileData){
+    debugger
     this.$router.push({name: 'Post', params: { postId: profileData._id } })
     this.$store.dispatch("setCurrentComments", profileData._id)
     },
@@ -68,7 +71,7 @@ export default {
       $("#editModal").modal("hide");
     },
     deletePost(profileData){
-      this.$store.dispatch('deletePost', profileData._id)
+      this.$store.dispatch('deletePost', profileData.id)
       console.log(profileData.id)
     }
 

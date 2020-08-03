@@ -33,7 +33,8 @@ export default {
     }
   },
   mounted(){
-  // this.$store.state.dispatch("getComments", this.#store.state.currentPost.id )
+    debugger
+  this.$store.dispatch("setCurrentComments", this.$route.params.postId)
   },
   computed:{
     comments() {
